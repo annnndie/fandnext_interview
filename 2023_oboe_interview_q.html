@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/">
-  <style type="text/tailwindcss">
-    @layer utilities {
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/">
+    <style type="text/tailwindcss">
+      @layer utilities {
         label.confirmed-checkbox {
           @apply mx-auto hover:cursor-pointer border border-white rounded;
         }
@@ -45,51 +44,50 @@
         }
       }
     </style>
-</head>
+  </head>
 
-<body>
-  <div class="flex flex-col items-center mt-12">
-    <input type="checkbox" name="confirmed_checkbox" id="confirmed_checkbox" value="1">
-    <label class="confirmed-checkbox" for="confirmed_checkbox">
-      <span id="confirmed-container">
-        <i class="fas fa-check-square"></i>
-        <div class="text-sm sm:text-xl ml-2">confirm</div>
-      </span>
-    </label>
-  </div>
-  <p class="text-center error-message-enabled" id="error_message">check checkbox</p>
-  <button class="mx-auto flex btn btn-disabled mt-8 
-      hover:bg-slate-700 hover:text-white" id="confirm_btn">
-    create
-  </button>
+  <body>
+    <div class="flex flex-col items-center mt-12">
+      <input type="checkbox" name="confirmed_checkbox" id="confirmed_checkbox" value="1">
+      <label class="confirmed-checkbox" for="confirmed_checkbox">
+        <span id="confirmed-container">
+          <i class="fas fa-check-square"></i>
+          <div class="text-sm sm:text-xl ml-2">confirm</div>
+        </span>
+      </label>
+    </div>
+    <p class="text-center error-message-enabled" id="error_message">check checkbox</p>
+    <button class="mx-auto flex btn btn-disabled mt-8 
+        hover:bg-slate-700 hover:text-white" id="confirm_btn">
+      create
+    </button>
 
-  <script>
-    const inputEl = document.getElementById("confirmed_checkbox")
-    const confirmedButton = document.getElementById("confirm_btn")
-    const errorMessage = document.getElementById("error_message")
+    <script>
+      const inputEl = document.getElementById("confirmed_checkbox")
+      const confirmedButton = document.getElementById("confirm_btn")
+      const errorMessage = document.getElementById("error_message")
 
-    if (inputEl.checked) {
-      errorMessage.classList.remove("error-message-enabled")
-      errorMessage.classList.add("error-message-disabled")
-    }
-
-    inputEl.addEventListener("change", (e) => {
-      if (e.target.checked) {
-        confirmedButton.classList.remove("btn-disabled")
-        confirmedButton.classList.add("btn-enabled")
-
-
+      if (inputEl.checked) {
         errorMessage.classList.remove("error-message-enabled")
         errorMessage.classList.add("error-message-disabled")
-      } else {
-        confirmedButton.classList.remove("btn-enabled")
-        confirmedButton.classList.add("btn-disabled")
-
-        errorMessage.classList.remove("error-message-disabled")
-        errorMessage.classList.add("error-message-enabled")
       }
-    })
-  </script>
-</body>
 
+      inputEl.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          confirmedButton.classList.remove("btn-disabled")
+          confirmedButton.classList.add("btn-enabled")
+
+
+          errorMessage.classList.remove("error-message-enabled")
+          errorMessage.classList.add("error-message-disabled")
+        } else {
+          confirmedButton.classList.remove("btn-enabled")
+          confirmedButton.classList.add("btn-disabled")
+
+          errorMessage.classList.remove("error-message-disabled")
+          errorMessage.classList.add("error-message-enabled")
+        }
+      })
+    </script>
+  </body>
 </html>
