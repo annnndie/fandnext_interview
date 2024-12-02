@@ -4,18 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/">
     <style type="text/tailwindcss">
       @layer utilities {
         label.confirmed-checkbox {
-          @apply mx-auto hover:cursor-pointer;
+          @apply mx-auto hover:cursor-pointer border border-white rounded;
         }
         input[type="checkbox"] { @apply invisible w-0 m-0 p-0; }
-        input[type="checkbox"]+span {
+        .confirmed-checkbox > span {
           @apply border border-stone-50 bg-stone-50 px-4 py-3 rounded font-normal text-base w-fit flex items-center;
         }
-        input[type="checkbox"]+span > i {
-          @apply border border-stone-200 bg-white rounded text-white mr-2;
+        .confirmed-checkbox > span > i {
+          @apply border border-stone-200 bg-white rounded text-white text-center;
           width: 17.5px;
           height: 17.5px;
         }
@@ -29,26 +30,64 @@
         .btn-disabled {
           @apply text-stone-500 border border-stone-200 bg-stone-50 shadow-none;
         }
+        .error-message-enabled {
+          @apply text-red-500;
+        }
+        .error-message-disabled {
+          @apply text-white;
+        }
+        input[type="checkbox"]:checked + .confirmed-checkbox {
+          @apply border-blue-700;
+        }
+        input[type="checkbox"]:checked + .confirmed-checkbox i {
+          @apply text-blue-700 border-none;
+        }
       }
     </style>
   </head>
+
   <body>
-    <div class="flex flex-col items-centerm mt-12">
+    <div class="flex flex-col items-center mt-12">
+      <input type="checkbox" name="confirmed_checkbox" id="confirmed_checkbox" value="1">
       <label class="confirmed-checkbox" for="confirmed_checkbox">
-        <input type="checkbox" name="confirmed_checkbox" id="confirmed_checkbox" value="1">
-        <span>
+        <span id="confirmed-container">
           <i class="fas fa-check-square"></i>
-          <div class="ml-2">confirm</div>
+          <div class="text-sm sm:text-xl ml-2">confirm</div>
         </span>
       </label>
     </div>
-    <button class="mx-auto flex btn btn-disabled mt-8" id="confirm_btn">create</button>
+    <p class="text-center error-message-enabled" id="error_message">check checkbox</p>
+    <button class="mx-auto flex btn btn-disabled mt-8 
+        hover:bg-slate-700 hover:text-white" id="confirm_btn">
+      create
+    </button>
 
     <script>
-      document.getElementById("confirm_btn").addEventListener("click", function() {
-        alert("welcome to fandnext");
+      const inputEl = document.getElementById("confirmed_checkbox")
+      const confirmedButton = document.getElementById("confirm_btn")
+      const errorMessage = document.getElementById("error_message")
+
+      if (inputEl.checked) {
+        errorMessage.classList.remove("error-message-enabled")
+        errorMessage.classList.add("error-message-disabled")
+      }
+
+      inputEl.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          confirmedButton.classList.remove("btn-disabled")
+          confirmedButton.classList.add("btn-enabled")
+
+
+          errorMessage.classList.remove("error-message-enabled")
+          errorMessage.classList.add("error-message-disabled")
+        } else {
+          confirmedButton.classList.remove("btn-enabled")
+          confirmedButton.classList.add("btn-disabled")
+
+          errorMessage.classList.remove("error-message-disabled")
+          errorMessage.classList.add("error-message-enabled")
+        }
       })
     </script>
   </body>
 </html>
-
